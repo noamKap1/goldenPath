@@ -1,0 +1,47 @@
+Step 1 – Business Logic:
+
+4:
+code in java:
+
+import java.util.Scanner;
+
+public class TakeOff
+{
+	static Scanner input = new Scanner(System.in);
+	public static void main(String[] args)
+	{	System.out.println("Please enter the weight of the heavy luggage (in kg)");
+		double m = input.nextDouble();
+		m += 35000;
+		System.out.println(TakeOffDistance(m));
+		System.out.println(TakeOffTime(m));
+		if(TakeOffTime(m)>60){
+			//t=60 is the max time so the m that leads to this time is the max weight
+			//t=60 -> a=7/3 -> m=300000/7, so the max weight is m=300000/7
+			System.out.println(m-300000/7);
+		}
+	}
+	public static double TakeOffDistance(double m){
+		//a=f/m
+		double a = 100000/m;
+		//v=a*t
+		double t = 140/a;
+		//x=0.5at^2+v_0t+x_0
+		double x = 0.5*a*t*t;
+		return x;
+	}
+	public static double TakeOffTime(double m){
+//		a=f/m
+		double a = 100000/m;
+//		v=a*t
+		double t = 140/a;
+		return t;
+	}
+
+}
+
+5:
+המקרה קצה היחיד שיש בתוכנית הינו כאשר מזינים שהמסה של המטען שווה למשקל שלילי - דבר לא הגיוני
+לא יכולים להיות שגיאות מכיוון שזה חישוב קבוע של מחשב
+בכדי לוודא שהתשובות נכונות אפשר לחשב לאחור את הנתונים שלנו ובכך אם הם יצאו כפי שקיבלנו אותם אז צדקנו
+6:
+ניתן לשפר את המודל בכדי שיהיה יותר מדויק אם נחשב גם את התנגדות האוויר 
